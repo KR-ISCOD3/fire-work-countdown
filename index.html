@@ -5,14 +5,24 @@
 <title>New Year Countdown Fireworks</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bayon&display=swap" rel="stylesheet">
+
 
 <style>
+.bayon-regular {
+  font-family: "Bayon", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 html, body {
+    font-family: "Bayon", sans-serif;
     margin: 0;
     height: 100%;
-    background: linear-gradient(to bottom, #0a0a2e 0%, #16213e 50%, #1a1a3e 100%);
+    background: linear-gradient(to bottom, #0a0a2e 0%, #0e204f 50%, #1a1a3e 100%);
     overflow: hidden;
-    font-family: 'Arial', sans-serif;
 }
 canvas {
     position: fixed;
@@ -63,17 +73,18 @@ canvas {
 
 @media (max-width: 768px) {
     .countdown-label {
-        font-size: 18px;
+        font-size: 40px;
         padding: 0 10px;
+        line-height: 1.4;
     }
     .time-unit {
         margin: 0 8px;
     }
     .time-value {
-        font-size: 50px;
+        font-size: 60px;
     }
     .time-label {
-        font-size: 14px;
+        font-size: 40px;
     }
     .message {
         font-size: 24px;
@@ -89,20 +100,26 @@ canvas {
         padding: 10px 20px;
         font-size: 14px;
     }
+    .video-container {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
     .countdown-label {
-        font-size: 16px;
+        font-size: 20px;
+        line-height: 1.5;
+        padding: 0 15px;
     }
     .time-unit {
         margin: 0 5px;
     }
     .time-value {
-        font-size: 40px;
+        font-size: 50px;
     }
     .time-label {
-        font-size: 12px;
+        font-size: 20px;
     }
     .message {
         font-size: 20px;
@@ -165,6 +182,17 @@ button:hover {
 button:active {
     transform: scale(0.95);
 }
+.video-container {
+    margin: 30px auto;
+    max-width: 800px;
+    width: 100%;
+}
+.video-container iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
 </style>
 </head>
 
@@ -173,7 +201,8 @@ button:active {
 <canvas id="fireworks"></canvas>
 
 <div class="countdown-container">
-    <div class="countdown-label">Countdown to New Year 2026</div>
+    <div class="countdown-label" style="margin-bottom: 0;">នឹកគេមែនបានចូលមើល​ ?</div>
+    <div class="countdown-label" style="margin-top: 5px;">មើលហើយនៅ Countdown ផង 😒</div>
     <div class="countdown" id="countdown">
         <div class="time-unit">
             <span class="time-value" id="hours">
@@ -190,6 +219,7 @@ button:active {
             <!-- <span class="time-label">Seconds</span> -->
         </div>
     </div>
+  
     <div class="message" id="message"></div>
 </div>
 
@@ -327,19 +357,10 @@ function startCelebration() {
     // Get the new year
     const newYear = new Date().getFullYear();
     
-    // Show message
+    // Show message with video
     messageEl.innerHTML = `🎉 HAPPY NEW YEAR! 🎉<br><span class="year">${newYear}</span><br><br>
-    <div style="font-size: 18px; line-height: 1.8; max-width: 800px; margin: 20px auto; text-align: left;">
-    ក្នុងឆ្នាំ ២០២៥ ជួបរឿងច្រើនណាស់ រឿងខ្លះសប្បាយ រឿងខ្លះពិបាក សប្បាយបានមួយភ្លេត ក៏សេដឡើងមួយប្រាវ តែមួយប្រាវវាមិនមែនមួយភ្លេតទេ វាជាដំបៅ ដែលកូនចៅប្រុសស្រីឈឺចាប់ មិនអាចភ្លេចបាន។<br><br>
-    ២៨ ខែឧសភា ជាលើកទី ១<br>
-    ២៤ ខែកក្កដា ជាលើកទី ២<br>
-    ថ្ងៃទី ១ ខែសីហា ជាលើកទី ៣<br>
-    ថ្ងៃទី ៨ ខែធ្នូ ជាលើកទី ៤<br><br>
-    មួយឆ្នាំពេញមិនសូវមានភាពសុខសប្បាយ ចាកចេញពីផ្ទះទាំងក្នុងចិត្តមិនសូវស្រស់ស្រាយ ពិបាកនឹងបរិយាយ ដោយរាងកាយភៀសសឹកហើយ ពុកត្រូវឃ្លាតឆ្ងាយ ដើម្បីគ្រួសារសុខសប្បាយ ទោះត្រូវបូជាកាយក៏មិនស្ដាយ នេះហើយជាសង្គ្រាម ដែលសៀមឈ្លានពានតាំងពីដើមមកហើយ។<br><br>
-    សូមគោរពដឹងគុណដល់វីរៈកងទ័ព ដែលបានពលីការពារទឹកដី ពីចោរវង្វេងផែនទី ហ៊ានក្លែងប្រវត្តិសាស្ត្រ ដែលចារចូលបញ្ជី។ វាហ៊ានខ្លាំងណាស់ មានតែមួយគ្មានពីរ សម្ដីខ្លាំងណាស់ថាវាយតែ ៥ នាទី តែទ័ពខ្មែរខ្លាំង ការពារព្រះធរណី ចូល ៥ ងាប់ ៥ ចូល ១២ ងាប់ ១២ គាត់តស៊ូខ្លាំងណាស់ ទោះដឹងថាត្រូវប្ដូរជីវី។<br><br>
-    ១៥៥ ថ្ងៃដែលត្រូវជាប់ឃុំ ស៊ូទ្រាំយប់ថ្ងៃ ដើម្បីមាតុភូមិ ទោះជីវិតត្រូវក្ស័យ ក៏មិនដូរដីខ្ញុំ ទឹកចិត្តថ្លាថ្លៃអោយតែដែនដីសុខដុម។ នេះជារឿងដែលយើងត្រូវចាំ សាមគ្គីជាកម្លាំងតតាំងសត្រូវ បែងចែកអោយដាច់ដឹងខុសដឹងត្រូវ កុំចាញ់បោកគេព្រោះគេនឹងរិះរកគ្រប់ផ្លូវ<br><br>
-    ឆ្នាំថ្មីមកដល់សូមអោយសុខសាន្ដ ប្រជារាស្រ្តបានសុខប្រទេសជាតិថ្កុំថ្កើង កុំអោយជួបទុក្ខ ដូចដែលបានកើតឡើង សង្ឃឹមថ្ងៃមុខយើងនឹងរីកចម្រើន ជូនពរអោយបានសុខដល់អ្នកដែលបានអាន<br><br>
-    បើមានកំហុសត្រង់ណាសូមអាធ្យាស្រ័យ ពាក្យពេច៍នឹងអត្ថន័យគឺបរិយាយចេញពីចិត្ត
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/nCmDzOaArkc?si=gmXiQy6_YjQkjQ-X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>`;
     messageEl.classList.add('show');
     
